@@ -27,6 +27,16 @@ spring:
                 - "openid"
                 - "profile"
 
+  datasource:
+    username: user
+    password: password
+    url: jdbc:postgresql://localhost:5432/authservice
+
+  flyway:
+    user: user
+    password: password
+    url: jdbc:postgresql://localhost:5432/authservice
+
 logging:
   level:
     org.springframework: DEBUG
