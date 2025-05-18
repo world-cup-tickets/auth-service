@@ -12,6 +12,15 @@ spring:
     password: ${POSTGRES_PASSWORD}
     url: ${POSTGRES_URL}
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: prometheus,health,info
+  endpoint:
+    prometheus:
+        enabled: true
+
 logging:
   level:
     org.springframework: DEBUG
