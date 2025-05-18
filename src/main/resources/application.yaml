@@ -3,14 +3,14 @@ spring:
     name: auth-service
 
   datasource:
-    username: user
-    password: password
-    url: jdbc:postgresql://localhost:5432/authservice
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
+    url: ${POSTGRES_URL}
 
   flyway:
-    user: user
-    password: password
-    url: jdbc:postgresql://localhost:5432/authservice
+    user: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
+    url: ${POSTGRES_URL}
 
 logging:
   level:
