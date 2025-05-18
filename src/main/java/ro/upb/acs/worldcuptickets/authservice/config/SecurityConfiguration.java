@@ -92,21 +92,41 @@ public class SecurityConfiguration{
 
     @Bean
     public RegisteredClientRepository registeredClientRepository() {
-        RegisteredClient oidcClient = RegisteredClient.withId(UUID.randomUUID().toString())
-            .clientId("oidc-client")
+        RegisteredClient ticketClient = RegisteredClient.withId(UUID.randomUUID().toString())
+            .clientId("ticket-client")
             .clientSecret(passwordEncoder().encode("secret"))
             .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_POST)
             .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
             .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
             .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
-            .redirectUri("http://localhost:8080/login/oauth2/code/oidc-client")
+            .redirectUri("http://localhost:8080/login/oauth2/code/ticket-client")
             .postLogoutRedirectUri("http://localhost:8080/")
             .scope(OidcScopes.OPENID)
             .scope(OidcScopes.PROFILE)
-            .clientSettings(ClientSettings.builder().requireAuthorizationConsent(true).build())
+            .scope("ticket.read")
+            .scope("ticket.write")
+            .scope("ticket.delete")
+            .clientSettings(ClientSettings.builder().requireAuthorizationConsent(false).build())
             .build();
 
-        return new InMemoryRegisteredClientRepository(oidcClient);
+        RegisteredClient matchClient = RegisteredClient.withId(UUID.randomUUID().toString())
+            .clientId("match-client")
+            .clientSecret(passwordEncoder().encode("secret"))
+            .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_POST)
+            .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
+            .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
+            .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
+            .redirectUri("http://localhost:8080/login/oauth2/code/match-client")
+            .postLogoutRedirectUri("http://localhost:8080/")
+            .scope(OidcScopes.OPENID)
+            .scope(OidcScopes.PROFILE)
+            .scope("match.read")
+            .scope("match.write")
+            .scope("match.delete")
+            .clientSettings(ClientSettings.builder().requireAuthorizationConsent(false).build())
+            .build();
+
+        return new InMemoryRegisteredClientRepository(ticketClient, matchClient);
     }
 
     @Bean

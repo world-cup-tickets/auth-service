@@ -20,6 +20,13 @@ management:
   endpoint:
     prometheus:
         enabled: true
+  metrics:
+    enable:
+      all: true
+  prometheus:
+    metrics:
+      export:
+        enabled: true
 
 logging:
   level:
