@@ -4,9 +4,8 @@ spring:
 
   security:
     oauth2:
-      resourceserver:
-        jwt:
-          issuer-uri: ${ISSUER_URI:http://localhost:8080}
+      authorizationserver:
+        issuer: ${ISSUER_URI:http://localhost:8080}
 
   datasource:
     username: ${POSTGRES_USER:user}
