@@ -1,5 +1,6 @@
 package ro.upb.acs.worldcuptickets.authservice.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 
 import java.security.KeyPair;
@@ -40,6 +41,9 @@ import org.springframework.security.web.util.matcher.MediaTypeRequestMatcher;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration{
+
+    @Value("${oauth2.issuer}")
+    public String issuer;
 
     @Bean
     @Order(1)
@@ -162,7 +166,9 @@ public class SecurityConfiguration{
 
     @Bean
     public AuthorizationServerSettings authorizationServerSettings() {
-        return AuthorizationServerSettings.builder().build();
+        return AuthorizationServerSettings.builder()
+            .issuer(issuer)
+            .build();
     }
 
 }

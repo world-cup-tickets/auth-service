@@ -2,11 +2,6 @@ spring:
   application:
     name: auth-service
 
-  security:
-    oauth2:
-      authorizationserver:
-        issuer: ${ISSUER_URI:http://localhost:8080}
-
   datasource:
     username: ${POSTGRES_USER:user}
     password: ${POSTGRES_PASSWORD:password}
@@ -36,3 +31,6 @@ management:
 logging:
   level:
     org.springframework: DEBUG
+
+oauth2:
+  issuer: ${ISSUER_URI:http://localhost:8080}
